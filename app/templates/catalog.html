@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+    {% if current_user.is_anonymous %}
+        <div class="hero min-h-screen"
+             style="background-image: url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg);">
+            <div class="hero-overlay bg-opacity-60"></div>
+            <div class="hero-content text-center text-neutral-content">
+                <div class="max-w-md">
+                    <h1 class="mb-5 text-5xl font-bold">Oops, it seems like you're not logged in...</h1>
+                    <p class="mb-5">Make sure to register with Movie Reviews to stay caught up with new releases and see
+                        what's trending.</p>
+                    <button class="btn btn-primary">
+                        <a href="{{ url_for("register") }}">Register</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="carousel carousel-center max-w-full p-4 space-x-4 bg-neutral rounded-box">
+            {% for movie in blockbuster_movies %}
+                <div class="carousel-item">
+{#                    <a href="{{ url_for("movie", movie_id=movie.id) }}">#}
+                    <a href="{{ url_for("index") }}">
+                        <img src="{{ "https://image.tmdb.org/t/p/w342//" + movie.poster_path }}" class="rounded-box poster" alt=""/>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="carousel carousel-center max-w-full p-4 space-x-4 bg-neutral rounded-box">
+            {% for movie in blockbuster_movies %}
+                <div class="carousel-item">
+                    <img src="https://daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.jpg"
+                         class="rounded-box" alt=""/>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% endif %}
+
+    {% for foo in stuff %}
+
+    {% endfor %}
+
+
+{% endblock %}
