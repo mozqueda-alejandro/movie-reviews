@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+
+{% block body %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="toast toast-top toast-center mt-16">
+                    <div class="alert alert-info">
+                        <span>{{ message }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="flex items-center justify-center h-screen">
+        <div class="card w-96 bg-neutral text-neutral-content">
+            <div class="card-body items-center text-center">
+                <form action="" method="POST" novalidate class="text-left">
+                    {{ form.hidden_tag() }}
+                    <p class="label-text">
+                        {{ form.username.label(class_="label-text") }}
+                        {{ form.username(class_="input input-bordered w-full max-w-xs mb-2") }}
+                    </p>
+                    <p class="label-text">
+                        {{ form.password.label(class_="label-text") }}
+                        {{ form.password(class_="input input-bordered w-full max-w-xs mb-2" ) }}
+                    </p>
+                    <div class="card-actions justify-end">
+                        {{ form.submit(class_="btn btn-outline") }}
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

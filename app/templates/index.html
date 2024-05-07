@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="hero bg-base-200">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+            <img src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
+                 class="max-w-lg rounded-lg shadow-2xl"/>
+            <div class="max-w-prose">
+                <h1 class="text-5xl font-bold">Hello there</h1>
+                <p class="py-6">Welcome to Alex's Movie Reviews – where movie magic meets your voice! Share your movie
+                    reviews, discover hidden gems, and connect with fellow film enthusiasts. Unleash your inner critic
+                    and curate your cinematic journey. Lights, camera, interaction – your adventure begins here!</p>
+                <button class="btn btn-primary">
+                    <a href="{{ url_for("catalog") }}">View Catalog</a>
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+    {% with errors = get_flashed_messages(category_filter=["error"]) %}
+        {% if errors %}
+            <div class="toast toast-top toast-end mt-16">
+                {% for error in errors %}
+                    <div class="alert alert-error">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+                             viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>{{ error }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+        {% if messages %}
+            <div class="toast toast-top toast-end mt-16">
+                {% for message in messages %}
+                    <div class="alert alert-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+                             viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>{{ message }}<a class="link link-primary" href="{{ url_for("login") }}">here</a>.</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="flex items-center justify-center h-screen">
+        <div class="card w-84 bg-neutral text-neutral-content">
+            <div class="card-body items-center text-center">
+                <form action="" method="POST" novalidate class="text-left">
+                    {{ form.hidden_tag() }}
+                    <p class="label-text">
+                        {{ form.username.label(class_="label-text") }} <br>
+                        {{ form.username(class_="input input-bordered w-full max-w-xs mb-2") }}
+                    </p>
+                    <p class="label-text">
+                        {{ form.email.label(class_="label-text text-2x1") }}<br>
+                        {{ form.email(class_="input input-bordered w-full max-w-xs mb-2") }}
+                    </p>
+                    <p class="label-text">
+                        {{ form.phone_number.label(class_="label-text text-2x1") }}<br>
+                        {{ form.phone_number(class_="input input-bordered w-full max-w-xs mb-2") }}
+                    </p>
+                    <p class="label-text text-2x1">
+                        {{ form.password.label(class_="label-text text-x1") }}<br>
+                        {{ form.password(class_="input input-bordered w-full max-w-xs mb-4") }}
+                    </p>
+                    <div class="card-actions justify-end">
+                        {{ form.submit(class_="btn btn-outline") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
