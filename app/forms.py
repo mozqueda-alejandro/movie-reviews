@@ -16,3 +16,10 @@ class RegisterForm(FlaskForm):
     phone_number = StringField("Phone Number", validators=[Optional()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Register")
+
+
+class EditUserForm(FlaskForm):
+    username = StringField("Username", validators=[DataRequired()])
+    email = StringField("Email", validators=[Optional()])
+    phone_number = StringField("Phone Number", validators=[Optional()])
+    submit = SubmitField("Update")

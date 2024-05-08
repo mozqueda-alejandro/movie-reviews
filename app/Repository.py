@@ -19,28 +19,28 @@ class Repository:
         self.cursor.execute(sql_script, (username, email, phone_number, password))
         return None
 
-    def get_popular_movies(self):
+    def get_popular_movies(self, limit: int = 50) -> pd.DataFrame:
         from app.models import Movie
         popular_movies = self.db.session.scalars(self.db.select(Movie).
                                                  where(Movie.vote_count > 1000).
                                                  order_by(Movie.vote_average.desc()).
-                                                 limit(50)).all()
+                                                 limit(limit)).all()
         return popular_movies
 
-    def get_blockbuster_movies(self):
+    def get_blockbuster_movies(self, limit: int = 50):
         from app.models import Movie
         blockbuster_movies = self.db.session.scalars(self.db.select(Movie).
                                                      where(Movie.revenue > 100000000).
                                                      order_by(Movie.revenue.desc()).
-                                                     limit(50)).all()
+                                                     limit(limit)).all()
         return blockbuster_movies
 
-    def get_classic_movies(self):
+    def get_classic_movies(self, limit: int = 50):
         from app.models import Movie
         classic_movies = self.db.session.scalars(self.db.select(Movie).
                                                  where(Movie.release_date < "1980-01-01").
                                                  # order_by(Movie.release_date.desc()).
-                                                 limit(50)).all()
+                                                 limit(limit)).all()
         return classic_movies
 
     def get_movie_ids(self):
