@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+
+    <h1>User Settings</h1>
+    <div class="settings">
+        <h2>Edit Profile</h2>
+        <div class="profile">
+            <div class="profile-field">
+                <p>Username:</p>
+                <p>{{ user.username }}</p>
+            </div>
+            <div class="profile-field">
+                <p>Email:</p>
+                <p>{{ user.email }}</p>
+            </div>
+            <div class="profile-field">
+                <p>First Name:</p>
+                <p>{{ user.first_name }}</p>
+            </div>
+            <div class="profile-field">
+                <p>Last Name:</p>
+                <p>{{ user.last_name }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="delete-account">
+        <h2>Delete Account</h2>
+        <button class="btn" onclick="openDeleteConfirmation()">Delete Account</button>
+    </div>
+
+    <!-- Modal for editing profile fields -->
+    <dialog id="editModal" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg">Edit Field</h3>
+            <div class="modal-content">
+                <label for="editField">New Value:</label>
+                <input type="text" id="editField" name="editField">
+            </div>
+            <div class="modal-action">
+                <button class="btn" onclick="closeModal()">Cancel</button>
+                <button class="btn" onclick="saveChanges()">Save</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Modal for delete confirmation -->
+    <dialog id="deleteConfirmationModal" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg">Delete Account</h3>
+            <p class="py-4">Are you sure you want to delete your account?</p>
+            <div class="modal-action">
+                <button class="btn" onclick="closeDeleteConfirmation()">Cancel</button>
+                <button class="btn" onclick="deleteAccount()">Delete</button>
+            </div>
+        </div>
+    </dialog>
+
+{% endblock %}

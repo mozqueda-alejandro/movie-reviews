@@ -100,6 +100,35 @@ def register():
     return render_template("register.html", title="Register", form=form)
 
 
+@app.route('/settings')
+def settings():
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+
+    form = EditUserForm()
+    form_username = form.username.data
+    form_email = form.email.data
+    form_phone_number = form.phone_number.data
+
+    if form.validate_on_submit():
+        errors = []
+        if not is_valid_email(form_email):
+            errors.append("Invalid email address.")
+        if len(form_phone_number) != 0:
+            if not is_valid_phone_number(form_phone_number):
+                errors.append("Invalid phone number.")
+        if len(errors) != 0:
+            for error in errors:
+                flash(error, "error")
+            return redirect(url_for('settings'))
+
+        repository.update_user(current_user.id, form_username, form_email, form_phone_number)
+        flash("User information updated successfully", "success")
+
+
+    return render_template("settings.html")
+
+
 def is_valid_email(email):
     pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     match = re.match(pattern, email)
